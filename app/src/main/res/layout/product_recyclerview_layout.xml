@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="32dp"
+    app:cardBackgroundColor="#F0F0F0"
+    app:cardElevation="1dp"
+    android:elevation="1dp"
+    app:strokeColor="#DEDEDE"
+    app:strokeWidth="0.5dp"
+    app:cardCornerRadius="0dp"
+    android:layout_marginVertical="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:cardElevation="0dp"
+            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="201dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/product_image"
+                    android:layout_width="250dp"
+                    android:layout_height="149dp"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="3.5">
+                <TextView
+                    android:id="@+id/title_with_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#23262F"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="26dp" />
+                <TextView
+                    android:id="@+id/sentence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#777E90"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="26dp"
+                    android:lineHeight="20sp"
+                    android:layout_marginBottom="26dp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:layout_weight="5">
+                <Button
+                    android:id="@+id/scan_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/button_layout"
+                    android:text="Scan"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:layout_gravity="bottom"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/poppins_regular" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

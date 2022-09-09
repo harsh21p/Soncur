@@ -1,0 +1,54 @@
+Example :
+1,11,Rohan’s Ring,925 Silver,Rohan’s Gift to radha,ID0001:2,24,Harsh’s Ring,823 Gold,Harsh’s Gift to ravi,ID0002
+
+Explanation :
+Personal/Non_personal  , Ring/Pendant/Earring , First_bold_line (ex. Rohan’s Ring) , Material_used (ex. 823 Gold/925 Silver) , Second_light_line (ex. Rohan’s Gift to radha) , ID_of_video_link (ex. ID0001)
+
+Reference :
+
+1) , is to separate product configuration parameters like it's type, material used, etc.
+2) : is to separate two product's
+
+1) 1 is for Personal
+2) 2 is for Non personal 
+
+BOP
+1) 11 BOP_Pendant_Gold.574_1
+2) 12 BOP_Pendant_Silver.568_1
+3) 13 BOP_Pendant_Silver.569_1
+4) 14 BOP_Pendant_Silver.570_1
+5) 15 BOP_Pendant_Silver.572_1
+6) 16 BOP_Pendant_Silver.573_1
+
+INT
+1) 21 INT_Earing.565
+2) 22 INT_Earing.566
+3) 23 INT_Pendant.567
+4) 24 INT_Pendant.568
+5) 25 INT_RIng.567
+6) 26 INT_RIng.568
+
+Lapel Pins
+1) 31 Brochure Ring Render_Cufflink.542
+2) 32 Brochure Ring Render_Cufflink.543
+3) 33 Brochure Ring Render_Cufflink_Square.542
+4) 34 Brochure Ring Render_Cufflink_Square.543
+
+Pendants
+1) 41 Brochure Ring Render_Pendant_PNG.303_PS
+2) 42 Brochure Ring Render_Pendant_PNG.304_PS
+3) 43 Brochure Ring Render_Pendant_PNG.305_PS
+4) 44 Brochure Ring Render_Pendant_PNG.306_PS
+5) 45 Brochure Ring Render_Pendant_PNG.307_PS
+6) 46 Brochure Ring Render_Pendant_PNG.308_PS
+
+Rings
+1) 51 Brochure Ring Render_Ring_PNG.238_PS
+2) 52 Brochure Ring Render_Ring_PNG.239_PS
+3) 53 Brochure Ring Render_Ring_PNG.240_PS
+4) 54 Brochure Ring Render_Ring_PNG.247_PS
+5) 55 Brochure Ring Render_Ring_PNG.253_PS
+6) 56 Brochure Ring Render_Ring_PNG.254_PS
+
+
+

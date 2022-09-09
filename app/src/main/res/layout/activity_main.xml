@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/camera_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.camera.view.PreviewView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/preview"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="#7A000000">
+                <ImageView
+                    android:id="@+id/captured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:id="@+id/detected_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:background="#7A000000"/>
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/camera_bg">
+
+                    <ImageView
+                        android:id="@+id/scanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:src="@drawable/scanner"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="#7A000000"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="vertical"
+                android:paddingTop="60dp"
+                android:background="#7A000000">
+
+<!--                <TextView-->
+<!--                    android:id="@+id/detection"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="0000"-->
+<!--                    android:textColor="@color/white"/>-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:gravity="center">
+                    <LinearLayout
+                        android:id="@+id/flash_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:elevation="1dp"
+                        app:cardElevation="1dp"
+                        app:cardCornerRadius="50dp"
+                        android:background="@drawable/flash_button_bg"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/flash_on_off"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_baseline_highlight_off_24"
+                            android:layout_margin="13dp"/>
+
+                    </LinearLayout>
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/capture_button"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:cardElevation="1dp"-->
+<!--                        app:cardCornerRadius="50dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:background="@drawable/flash_button_bg"-->
+<!--                        android:layout_gravity="center">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/capture"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:src="@drawable/ic_baseline_photo_camera_24"-->
+<!--                            android:layout_margin="13dp"/>-->
+
+<!--                    </LinearLayout>-->
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+    </LinearLayout>
+
+
+    <include
+        android:id="@+id/bottom_sheet_layout"
+        layout="@layout/info_bottom_sheet"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

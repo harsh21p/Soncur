@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="111dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/secondry_logo_2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="54dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/personal_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/personal"
+                    android:layout_width="61dp"
+                    android:layout_height="21dp"
+                    android:text="@string/personal"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/personal_selected"
+                    android:layout_width="80dp"
+                    android:layout_height="1dp"
+                    android:visibility="visible"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/line"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/non_personal_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="51dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/non_personal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:text="@string/non_personal"
+                    android:textColor="#BDBDBD"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/non_personal_selected"
+                    android:layout_width="80dp"
+                    android:layout_height="1dp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/line"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/personal_product_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/non_personal_product_recycler"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" />
+        <ProgressBar
+            android:id="@+id/progress_dashboard"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
