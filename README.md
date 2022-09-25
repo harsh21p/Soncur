@@ -1,4 +1,4 @@
-# About 
+# About Soncur®
 <a href="https://soncur.in/">Soncur</a>
 
 <img width="1920" alt="Frame 46" src="https://user-images.githubusercontent.com/46632001/192146123-6bb331a5-60bf-44e1-805e-5849f986b88a.png">
