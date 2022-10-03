@@ -2,6 +2,7 @@ package com.example.soncur.activity.fragment
 
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +28,14 @@ class MobileFragment  : Fragment() {
 
         continue_button.setOnClickListener(View.OnClickListener {
             if(mobile_no_input.text.isNotBlank() && mobile_no_input.text.length == 10){
-
-                    showFragment(OtpVerification())
+                    progressbar_continue.visibility = View.VISIBLE
+                    continue_button.visibility = View.GONE
+                    val timeout = 1000
+                    Handler().postDelayed({
+                        progressbar_continue.visibility = View.GONE
+                        continue_button.visibility = View.VISIBLE
+                        showFragment(OtpVerification())
+                    }, timeout.toLong())
 
             }else{
                 Toast.makeText(requireActivity(),"Please enter mobile number",Toast.LENGTH_SHORT).show()

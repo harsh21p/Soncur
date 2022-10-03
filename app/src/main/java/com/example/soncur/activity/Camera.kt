@@ -37,14 +37,14 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var cameraSelector: CameraSelector
     private var imageCapture:ImageCapture? = null
-    private lateinit var bitmapBuffer: Bitmap
     private var camera: androidx.camera.core.Camera?=null
     private var imageAnalyzer: ImageAnalysis? = null
     private val cameraExecutor = Executors.newSingleThreadExecutor()
-    private var identifiedShape:String="non"
     private var objectDetectorHelper:ObjectDetectorHelper?=null
     private var productList = ArrayList<ModelHorizontalProduct>()
     private val productAdapter =  HorizontalProductViewHolder(productList,this)
+    private var checkIterations = true
+    private var list:List<String>?=null
 
     private val cameraProviderResult = registerForActivityResult(ActivityResultContracts.RequestPermission()){ permissionGranted->
         if(permissionGranted){
@@ -77,7 +77,7 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
         mRecyclerView.layoutManager = LinearLayoutManager(this@Camera,
             LinearLayoutManager.HORIZONTAL,false)
         mRecyclerView.adapter = productAdapter
-        
+
         setValue()
 
 
@@ -113,9 +113,9 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
             if(flashManager==0){
                 switchFlashLight(true)
                 flash_on_off.setImageDrawable(
-                        ContextCompat.getDrawable(this,
-                            R.drawable.ic_baseline_highlight_24
-                        ));
+                    ContextCompat.getDrawable(this,
+                        R.drawable.ic_baseline_highlight_24
+                    ));
                 flashManager=1
 
             }else{
@@ -129,7 +129,7 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
         })
 
 
-       val scannerAnimation: Animation? = AnimationUtils.loadAnimation(this, R.anim.up_animation)
+        val scannerAnimation: Animation? = AnimationUtils.loadAnimation(this, R.anim.up_animation)
         scanner.startAnimation(scannerAnimation)
 
 
@@ -180,12 +180,12 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
     private fun startCamera(){
         // listening for data from the camera
         cameraProviderFuture.addListener({
-           val cameraProvider = cameraProviderFuture.get()
+            val cameraProvider = cameraProviderFuture.get()
 
             val preview = Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_4_3)
                 .setTargetRotation(binding!!.preview.display.rotation).build().also{
-                it.setSurfaceProvider(binding!!.preview.surfaceProvider)
-            }
+                    it.setSurfaceProvider(binding!!.preview.surfaceProvider)
+                }
 
             imageAnalyzer =
                 ImageAnalysis.Builder()
@@ -202,8 +202,9 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
 
             try{
                 cameraProvider!!.unbindAll()
-                 camera = cameraProvider!!.bindToLifecycle(this,cameraSelector,preview,imageCapture,imageAnalyzer)
+                camera = cameraProvider!!.bindToLifecycle(this,cameraSelector,preview,imageCapture,imageAnalyzer)
 
+//                camera = cameraProvider!!.bindToLifecycle(this,cameraSelector,preview,imageCapture)
             } catch (e: Exception) {
                 Log.d(TAG, "Use case binding failed")
             }
@@ -282,31 +283,39 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
     }
 
     override fun onResults(
-        largest:Float,maxNo:Int,
-        bitmapBuffer: Bitmap
+        largest: String
     ) {
         this.runOnUiThread {
-            if(maxNo == 0){
-                identifiedShape="Heart"
-            }else{
-                if(maxNo == 1){
-                    identifiedShape="Circle"
-                }else{
-                    if(maxNo == 2){
-                        identifiedShape="Square"
-                    }else{
-                        if(maxNo == 3) {
-                            identifiedShape = "Regular"
-                        }
-                    }
-                }
-            }
-
-            if( productShape == identifiedShape && largest >= 90.0f){
+            list = largest.split(",")
+            Log.d("Result","$largest")
+            if("1" == list!![0] && checkIterations && list!![1]==productShape){
+                vibrate()
+                checkIterations = false
                 val iResultScreen = Intent(this@Camera, Result::class.java)
                 startActivity(iResultScreen)
                 finish()
             }
+//            if(maxNo == 0){
+//                identifiedShape="Heart"
+//            }else{
+//                if(maxNo == 1){
+//                    identifiedShape="Circle"
+//                }else{
+//                    if(maxNo == 2){
+//                        identifiedShape="Square"
+//                    }else{
+//                        if(maxNo == 3) {
+//                            identifiedShape = "Regular"
+//                        }
+//                    }
+//                }
+//            }
+//
+//            if( productShape == identifiedShape && largest >= 90.0f){
+//                val iResultScreen = Intent(this@Camera, Result::class.java)
+//                startActivity(iResultScreen)
+//                finish()
+//            }
         }
     }
 }

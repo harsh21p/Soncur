@@ -53,12 +53,20 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/camera_bg">
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
                     <ImageView
                         android:id="@+id/scanner"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:src="@drawable/scanner"
                         />
+
+
+                    </RelativeLayout>
 
                 </LinearLayout>
                 <LinearLayout

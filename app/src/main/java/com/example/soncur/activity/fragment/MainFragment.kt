@@ -123,7 +123,7 @@ class MainFragment : Fragment() {
             var uProductListSecond = uProductList[i].split(',')
             if(uProductListSecond.size!=1){
                 var temp = uProductListSecond[3]+"\n"+uProductListSecond[4]
-                var model = ModelProductList(uProductListSecond[1].toInt(),temp,uProductListSecond[0],uProductListSecond[2],uProductListSecond[5],uProductListSecond[0])
+                var model = ModelProductList(uProductListSecond[1].toInt(),temp,uProductListSecond[0],uProductListSecond[2],uProductListSecond[5],uProductListSecond[6])
                 if(uProductListSecond[0].toInt() != 2) {
                     productList!!.add(model)
                     productAdapter!!.notifyDataSetChanged()

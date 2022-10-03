@@ -1,5 +1,6 @@
 package com.example.soncur.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,13 +11,16 @@ import com.example.soncur.activity.fragment.CartFragment
 import com.example.soncur.activity.fragment.MagicFragment
 import com.example.soncur.activity.fragment.MainFragment
 import com.example.soncur.activity.fragment.ProfileFragment
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.dashboard.*
 
 class Dashboard : AppCompatActivity() {
+    private var auth: FirebaseAuth?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard)
+        auth = FirebaseAuth.getInstance()
 
         val fragmentHome = MainFragment()
         val fragmentProfile = ProfileFragment()
@@ -115,5 +119,16 @@ class Dashboard : AppCompatActivity() {
         }catch (e:Exception){
 
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        var user = auth!!.currentUser
+        if(user==null){
+            var iLogin =   Intent(this, Login::class.java)
+            startActivity(iLogin)
+            finish()
+        }
+
     }
 }
