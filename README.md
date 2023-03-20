@@ -24,3 +24,9 @@ Download APK
 <h3 align="left">Design:</h3>
 <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a>
   
+  
+<B>Demo</B>
+
+https://user-images.githubusercontent.com/46632001/226285421-b782450d-32b4-45db-a023-a8775217551a.mp4
+
+
