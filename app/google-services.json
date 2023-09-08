@@ -1,1 +1,40 @@
-
+{
+  "project_info": {
+    "project_number": "971520170689",
+    "firebase_url": "https://soncur-df355-default-rtdb.firebaseio.com",
+    "project_id": "soncur-df355",
+    "storage_bucket": "soncur-df355.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971520170689:android:d8b09ff8849be0354bd240",
+        "android_client_info": {
+          "package_name": "com.example.soncur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971520170689-jd5e3oiscflu1rm9h23ljh9dms1geljc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE61BhMSM_emOcn5awN0nn4a3_1xEe1z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971520170689-jd5e3oiscflu1rm9h23ljh9dms1geljc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
