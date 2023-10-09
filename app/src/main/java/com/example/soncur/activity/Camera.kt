@@ -148,7 +148,7 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
 
                 }else{
                     try {
-                        Toast.makeText(this,"Not found",Toast.LENGTH_LONG).show()
+//                        Toast.makeText(this,"Not found",Toast.LENGTH_LONG).show()
                     }catch (e:Exception){
 
                     }
@@ -163,7 +163,7 @@ class Camera : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
             }
         }else {
             try {
-                Toast.makeText(this,"Not found",Toast.LENGTH_LONG).show()
+//                Toast.makeText(this,"Not found",Toast.LENGTH_LONG).show()
             }catch (e:Exception){
 
             }

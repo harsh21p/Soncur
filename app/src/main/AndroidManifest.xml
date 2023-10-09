@@ -27,6 +27,7 @@
             android:name=".activity.SplashScreen"
             android:screenOrientation="portrait"
             android:label="Soncur"
+            android:launchMode="singleInstance"
             android:theme="@style/Theme.Soncur"
             android:exported="true">
             <intent-filter>
@@ -36,33 +37,38 @@
         </activity>
 
         <activity android:name="com.example.soncur.activity.Signup"
-            android:label="ForHealth"
+            android:label="Soncur"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing"
             android:theme="@style/Theme.Soncur">
         </activity>
 
         <activity android:name="com.example.soncur.activity.Login"
-            android:label="ForHealth"
+            android:label="Soncur"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Soncur">
         </activity>
 
         <activity android:name="com.example.soncur.activity.Dashboard"
-            android:label="ForHealth"
+            android:label="Soncur"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Soncur">
         </activity>
 
         <activity android:name="com.example.soncur.activity.Camera"
-            android:label="ForHealth"
+            android:label="Soncur"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Soncur">
         </activity>
 
         <activity android:name="com.example.soncur.activity.Result"
-            android:label="ForHealth"
+            android:label="Soncur"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Soncur">
         </activity>

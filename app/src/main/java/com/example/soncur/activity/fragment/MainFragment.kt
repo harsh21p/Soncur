@@ -84,7 +84,7 @@ class MainFragment : Fragment() {
                     if(uProduct == "") {
                         try {
                             progress_dashboard!!.visibility = View.GONE
-                            Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
+//                            Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
                         }catch (e:Exception){
 
                         }
@@ -102,7 +102,7 @@ class MainFragment : Fragment() {
 
                 try {
                     progress_dashboard!!.visibility = View.GONE
-                    Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
+//                    Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
                 }catch (e:Exception){
 
                 }
@@ -134,7 +134,7 @@ class MainFragment : Fragment() {
             }else{
                 try {
                     progress_dashboard!!.visibility = View.GONE
-                    Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
                 }catch (e:Exception){
 
                 }
@@ -150,7 +150,7 @@ class MainFragment : Fragment() {
         }else {
             try {
                 progress_dashboard!!.visibility = View.GONE
-                Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
+//                Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
             }catch (e:Exception){
 
             }

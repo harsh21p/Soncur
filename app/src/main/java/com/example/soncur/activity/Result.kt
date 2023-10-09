@@ -16,12 +16,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.result_screen.*
 
-
 class Result : AppCompatActivity() {
 
     var videoUrl:String?= null
-    var db = FirebaseFirestore.getInstance()
-    lateinit var auth: FirebaseAuth
+//    var db = FirebaseFirestore.getInstance()
+//    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,31 +31,39 @@ class Result : AppCompatActivity() {
             startActivity(iLoginScreen)
             finish()
         })
+        Log.e("@PID:", productId)
+         videoUrl = when (productId) {
+             "ID00021" -> "android.resource://$packageName/raw/meeras_square_ring_silver"
+             "ID00032" -> "android.resource://$packageName/raw/anu_gold_pendant_square"
+             else -> "android.resource://$packageName/raw/animation_p"
+         }
 
         progressbar_video.visibility = View.VISIBLE
-        auth= FirebaseAuth.getInstance()
+//        auth = FirebaseAuth.getInstance()
 
         val videoView = findViewById<VideoView>(com.example.soncur.R.id.video)
 
-        val docRef = db.collection("Links").document(auth!!.uid.toString())
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    try {
-                        videoUrl = document.data!!.getValue(productId).toString()
-                        videoSet(videoView)
-                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                    }catch (e:Exception){
-                        Toast.makeText(this,"Not found",Toast.LENGTH_LONG).show()
-                    }
+        videoSet(videoView);
 
-                } else {
-                    Log.d(TAG, "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
+//        val docRef = db.collection("Links").document(auth!!.uid.toString())
+//        docRef.get()
+//            .addOnSuccessListener { document ->
+//                if (document != null) {
+//                    try {
+//                        videoUrl = document.data!!.getValue(productId).toString()
+//                        videoSet(videoView)
+//                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+//                    }catch (e:Exception){
+//                        Toast.makeText(this,"Not found",Toast.LENGTH_LONG).show()
+//                    }
+//
+//                } else {
+//                    Log.d(TAG, "No such document")
+//                }
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.d(TAG, "get failed with ", exception)
+//            }
 
         videoView.setOnCompletionListener {
            Toast.makeText(this,"Thank you",Toast.LENGTH_LONG).show()
@@ -72,7 +79,6 @@ class Result : AppCompatActivity() {
             }
 
         }
-
 
         videoView.setOnInfoListener { mp, what, extra ->
 
@@ -94,13 +100,12 @@ class Result : AppCompatActivity() {
         }
     }
 
-
     override fun onStop() {
         super.onStop()
 
     }
-
     private fun videoSet(videoView:VideoView) {
+
         val uri: Uri = Uri.parse(videoUrl)
         videoView.setVideoURI(uri)
         val mediaController = MediaController(this)
