@@ -35,6 +35,7 @@ class Result : AppCompatActivity() {
          videoUrl = when (productId) {
              "ID00021" -> "android.resource://$packageName/raw/meeras_square_ring_silver"
              "ID00032" -> "android.resource://$packageName/raw/anu_gold_pendant_square"
+             "ID00022" -> "android.resource://$packageName/raw/meeras2_square_ring_silver"
              else -> "android.resource://$packageName/raw/animation_p"
          }
 
