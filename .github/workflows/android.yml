@@ -44,26 +44,17 @@ jobs:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CURRENT_KEY: ${{ secrets.CURRENT_KEY }}
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    needs: update-config
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    # - name: Set up JDK
-    #   uses: actions/setup-java@v2
-    #   with:
-    #     distribution: 'adopt'
-    #     java-version: '17'
-
-    # - name: Build with Gradle
-    #   run: |
-    #     chmod +x gradlew
-    #     ./gradlew clean
-    #     ./gradlew assembleRelease
+    - name: Build with Gradle
+      run: |
+        chmod +x gradlew
+        ./gradlew clean
+        ./gradlew assembleRelease
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
@@ -71,10 +62,10 @@ jobs:
         name: app-release
         path: app/google-services.json
       
-    # - name: Upload Artifact to Firebase App Distribution
-    #     uses: wzieba/Firebase-Distribution-Github-Action@v1
-    #     with:
-    #       appId: ${{ secrets.FD_PROJECT_ID }}
-    #       serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-    #       groups: testers
-    #       file: app/build/outputs/apk/release/app-release.apk
+    - name: Upload Artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FD_PROJECT_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app/build/outputs/apk/release/app-release.apk
