@@ -33,6 +33,7 @@ jobs:
         sed -i "s|__PACKAGE_NAME__|${PACKAGE_NAME}|g" $JSON_FILE
         sed -i "s|__CLIENT_ID__|${CLIENT_ID}|g" $JSON_FILE
         sed -i "s|__CURRENT_KEY__|${CURRENT_KEY}|g" $JSON_FILE
+        cat ${JSON_FILE}
       env:
         PROJECT_NUMBER: ${{ secrets.PROJECT_NUMBER }}
         PROJECT_ID: ${{ secrets.PROJECT_ID }}
