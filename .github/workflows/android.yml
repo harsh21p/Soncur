@@ -55,17 +55,11 @@ jobs:
         chmod +x gradlew
         ./gradlew clean
         ./gradlew assembleRelease
-
-    # - name: Upload Artifact
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: app-release
-    #     path: app/google-services.json
-      
-    # - name: Upload Artifact to Firebase App Distribution
-    #     uses: wzieba/Firebase-Distribution-Github-Action@v1
-    #     with:
-    #       appId: ${{ secrets.FD_PROJECT_ID }}
-    #       serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-    #       groups: testers
-    #       file: app/build/outputs/apk/release/app-release.apk
+    
+    - name: Upload Artifact to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FD_PROJECT_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app/build/outputs/apk/release/app-release.apk
