@@ -53,17 +53,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '17'
+    # - name: Set up JDK
+    #   uses: actions/setup-java@v2
+    #   with:
+    #     distribution: 'adopt'
+    #     java-version: '17'
 
-    - name: Build with Gradle
-      run: |
-        chmod +x gradlew
-        ./gradlew clean
-        ./gradlew assembleRelease
+    # - name: Build with Gradle
+    #   run: |
+    #     chmod +x gradlew
+    #     ./gradlew clean
+    #     ./gradlew assembleRelease
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
