@@ -24,7 +24,9 @@ jobs:
         PACKAGE_NAME="${{ secrets.PACKAGE_NAME }}"
         CLIENT_ID="${{ secrets.CLIENT_ID }}"
         CURRENT_KEY="${{ secrets.CURRENT_KEY }}"
+        API_URL="${{ secrets.API_URL }}"
         JSON_FILE="app/google-services.json"
+        API_FILE="app/src/main/java/com/example/soncur/activity/ObjectDetectionHelper.kt"
         sed -i "s|__PROJECT_NUMBER__|${PROJECT_NUMBER}|g" $JSON_FILE
         sed -i "s|__PROJECT_ID__|${PROJECT_ID}|g" $JSON_FILE
         sed -i "s|__PROJECT_URL__|${PROJECT_URL}|g" $JSON_FILE
@@ -33,7 +35,7 @@ jobs:
         sed -i "s|__PACKAGE_NAME__|${PACKAGE_NAME}|g" $JSON_FILE
         sed -i "s|__CLIENT_ID__|${CLIENT_ID}|g" $JSON_FILE
         sed -i "s|__CURRENT_KEY__|${CURRENT_KEY}|g" $JSON_FILE
-        cat ${JSON_FILE}
+        sed -i "s|__API_URL__|${API_URL}|g" $API_FILE
       env:
         PROJECT_NUMBER: ${{ secrets.PROJECT_NUMBER }}
         PROJECT_ID: ${{ secrets.PROJECT_ID }}
@@ -43,6 +45,8 @@ jobs:
         PACKAGE_NAME: ${{ secrets.PACKAGE_NAME }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CURRENT_KEY: ${{ secrets.CURRENT_KEY }}
+        API_URL: ${{ secrets.API_URL }}
+
 
     - name: Set up JDK
       uses: actions/setup-java@v2

@@ -64,7 +64,7 @@ class ObjectDetectorHelper(
                 checkProcess = false
                 val request = object : VolleyFileUploadRequest(
                     Method.POST,
-                    "https://5dfa-34-142-138-64.ap.ngrok.io/upload",
+                    "__API_URL__",
                     Response.Listener {
                         checkProcess =true
                         objectDetectorListener?.onResults(
