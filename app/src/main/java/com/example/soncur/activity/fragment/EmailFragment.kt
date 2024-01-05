@@ -9,11 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.soncur.R
 import com.example.soncur.activity.Dashboard
-import com.example.soncur.activity.Signup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.email_fragment.*
+import kotlinx.android.synthetic.main.login_screen.go_to_signup
+import kotlinx.android.synthetic.main.login_screen.go_to_signup_page
 
 class EmailFragment  : Fragment() {
     private var database= FirebaseDatabase.getInstance()
@@ -26,30 +27,24 @@ class EmailFragment  : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.email_fragment, container, false)
     }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         try {
             database.setPersistenceEnabled(true)
             database.setPersistenceCacheSizeBytes((50 * 1000 * 1000).toLong())
         } catch (e: Exception) {
 
         }
-
         auth = FirebaseAuth.getInstance()
         myRef = database!!.reference
-
         login_button.setOnClickListener(View.OnClickListener {
-
             val emailId = email.text.toString()
             val passwordIn = password.text.toString()
             if(email.text.toString().isBlank() || password.text.toString().isBlank()){
-                Toast.makeText(requireActivity(),"Invalid", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(),"Invalid Details", Toast.LENGTH_LONG).show()
             }else {
                 login_button.visibility= View.GONE
                 progressbar_login.visibility= View.VISIBLE
-
                 auth.signInWithEmailAndPassword(emailId, passwordIn).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         progressbar_login.visibility= View.GONE
@@ -57,7 +52,6 @@ class EmailFragment  : Fragment() {
                         val iDashboard = Intent(requireActivity(), Dashboard::class.java)
                         startActivity(iDashboard)
                         requireActivity().finish()
-
                     }
                 }.addOnFailureListener { exception ->
                     login_button.visibility= View.VISIBLE
@@ -68,6 +62,4 @@ class EmailFragment  : Fragment() {
             }})
 
     }
-
-
 }

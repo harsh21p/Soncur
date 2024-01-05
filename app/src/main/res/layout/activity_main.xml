@@ -6,38 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.camera.view.PreviewView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/preview"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical">
+        <androidx.camera.view.PreviewView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/preview"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="#7A000000">
+                android:background="#4AFFFFFF">
                 <ImageView
                     android:id="@+id/captured"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
                 <ImageView
                     android:id="@+id/detected_image"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    />
-
+                    android:layout_weight="1" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,106 +42,57 @@
                     android:layout_width="match_parent"
                     android:layout_weight="5"
                     android:layout_height="match_parent"
-                    android:background="#7A000000"/>
+                    android:background="#4AFFFFFF"/>
                 <LinearLayout
                     android:layout_width="250dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/camera_bg">
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-
-
-                    <ImageView
-                        android:id="@+id/scanner"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:src="@drawable/scanner"
-                        />
-
-
+                        <ImageView
+                            android:id="@+id/scanner"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:src="@drawable/scanner_animation" />
                     </RelativeLayout>
-
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
-                    android:background="#7A000000"/>
+                    android:background="#4AFFFFFF"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:orientation="vertical"
-                android:paddingTop="60dp"
-                android:background="#7A000000">
-
-<!--                <TextView-->
-<!--                    android:id="@+id/detection"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:gravity="center"-->
-<!--                    android:text="0000"-->
-<!--                    android:textColor="@color/white"/>-->
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                android:background="#4AFFFFFF">
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:gravity="center">
-                    <LinearLayout
-                        android:id="@+id/flash_button"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:elevation="1dp"
-                        app:cardElevation="1dp"
-                        app:cardCornerRadius="50dp"
-                        android:background="@drawable/flash_button_bg"
-                        android:layout_gravity="center">
-
-                        <ImageView
-                            android:id="@+id/flash_on_off"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_baseline_highlight_off_24"
-                            android:layout_margin="13dp"/>
-
-                    </LinearLayout>
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/capture_button"-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:elevation="1dp"-->
-<!--                        app:cardElevation="1dp"-->
-<!--                        app:cardCornerRadius="50dp"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:background="@drawable/flash_button_bg"-->
-<!--                        android:layout_gravity="center">-->
-
-<!--                        <ImageView-->
-<!--                            android:id="@+id/capture"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:src="@drawable/ic_baseline_photo_camera_24"-->
-<!--                            android:layout_margin="13dp"/>-->
-
-<!--                    </LinearLayout>-->
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textSize="11sp"
+                    android:layout_marginTop="11dp"
+                    android:text="Please align the product within the scanner" />
+                <LinearLayout
+                    android:id="@+id/flash_button"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/flash_button_bg"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/flash_on_off"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/torch"
+                        android:layout_margin="12dp"/>
                 </LinearLayout>
-
-
-
             </LinearLayout>
-    </LinearLayout>
-
-
-    <include
-        android:id="@+id/bottom_sheet_layout"
-        layout="@layout/info_bottom_sheet"
-        />
+        </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

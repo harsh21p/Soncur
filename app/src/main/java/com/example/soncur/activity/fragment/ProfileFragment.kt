@@ -2,8 +2,6 @@ package com.example.soncur.activity.fragment
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,11 +19,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.profile_fragment.*
-import java.net.URI
-
 
 class ProfileFragment: Fragment() {
     private var database= FirebaseDatabase.getInstance()
@@ -44,34 +39,39 @@ class ProfileFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        progress_profile2.visibility = View.GONE
         try {
             progress_profile2.visibility = View.VISIBLE
             sRef.downloadUrl.addOnSuccessListener {
                 if(it!=null) {
                     try {
                         progress_profile2.visibility = View.GONE
-                        Picasso.get().load(it).into(profile_image)
+                        Picasso.get().load(it).into(profile_pic)
                     }catch (e:Exception){
-
+                        progress_profile2.visibility = View.GONE
                     }
-
                 }
             }
         }catch (e:Exception){
-
+            progress_profile2.visibility = View.GONE
         }
-
         logout_button.setOnClickListener(View.OnClickListener {
+            popup_logout?.visibility = View.VISIBLE
+        })
+
+        yes_button.setOnClickListener(View.OnClickListener {
+            popup_logout?.visibility = View.GONE
             auth.signOut()
             val iLoginScreen = Intent(activity, Login::class.java)
             startActivity(iLoginScreen)
             requireActivity().finish()
         })
 
+        no_button.setOnClickListener(View.OnClickListener {
+            popup_logout?.visibility = View.GONE
+        })
+
         myRef = database!!.reference
-
-
         myRef!!.child("myAuthUser").child(auth!!.uid.toString()).get().addOnSuccessListener {
                     try {
                         uName = it.child("Name").value.toString()
@@ -84,7 +84,6 @@ class ProfileFragment: Fragment() {
                     }catch (e:Exception){
 
                     }
-
                 }
         }.addOnFailureListener{
             try {
@@ -92,7 +91,6 @@ class ProfileFragment: Fragment() {
             }catch (e:Exception){
 
             }
-
             Log.e("firebase", "Error getting data", it)
         }
 
@@ -120,14 +118,12 @@ class ProfileFragment: Fragment() {
                             }catch (e:Exception){
 
                             }
-
-
                         }
                 }.addOnFailureListener {
                     //error
                 }
         } else {
-
+            progress_profile2.visibility = View.GONE
         }
     }
 
@@ -137,8 +133,10 @@ class ProfileFragment: Fragment() {
         if(requestCode == 100){
             if(resultCode == RESULT_OK){
                 image = data!!.data
-                profile_image.setImageURI(image)
+                Picasso.get().load(image).into(profile_pic)
                 uploadImage()
+            }else{
+                progress_profile2.visibility = View.GONE
             }
         }
     }

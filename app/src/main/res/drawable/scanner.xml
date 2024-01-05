@@ -1,10 +1,13 @@
-<?xml version = "1.0" encoding = "utf-8" ?>
-<shape
-    android:shape = "rectangle"
-    xmlns:android = "http://schemas.android.com/apk/res/android" >
-    <gradient
-        android:startColor = "#00FFFFFF"
-        android:endColor = "#FFFFFF"
-        android:angle = "90"
-        android:type = "linear" />
-</shape>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="39dp"
+    android:height="39dp"
+    android:viewportWidth="39"
+    android:viewportHeight="39">
+  <path
+      android:pathData="M6.5,3.052C5.466,3.052 4.474,3.453 3.742,4.165C3.011,4.878 2.6,5.845 2.6,6.852V13.186H0V6.852C0,5.173 0.685,3.562 1.904,2.374C3.123,1.186 4.776,0.519 6.5,0.519L13,0.519V3.052H6.5ZM32.5,3.052H26V0.519H32.5C34.224,0.519 35.877,1.186 37.096,2.374C38.315,3.562 39,5.173 39,6.852V13.186H36.4V6.852C36.4,5.845 35.989,4.878 35.258,4.165C34.526,3.453 33.534,3.052 32.5,3.052ZM33.8,20.786H5.2V18.252H33.8V20.786ZM0,32.186V25.852H2.6V32.186C2.6,33.194 3.011,34.16 3.742,34.873C4.474,35.585 5.466,35.986 6.5,35.986H13V38.519H6.5C4.776,38.519 3.123,37.852 1.904,36.664C0.685,35.476 0,33.865 0,32.186ZM36.4,32.186V25.852H39V32.186C39,33.865 38.315,35.476 37.096,36.664C35.877,37.852 34.224,38.519 32.5,38.519H26V35.986H32.5C33.534,35.986 34.526,35.585 35.258,34.873C35.989,34.16 36.4,33.194 36.4,32.186Z"
+      android:fillColor="#000000"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M11.652,11.671h15.697v15.697h-15.697z"
+      android:fillColor="#000000"/>
+</vector>

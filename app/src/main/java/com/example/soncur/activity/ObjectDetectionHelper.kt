@@ -22,49 +22,21 @@ class ObjectDetectorHelper(
 
     private var imageW = 224
     private var imageH = 224
-    var imageBitmap:Bitmap? = null
     private var checkProcess = true
     fun detect(image: ImageProxy,imageImage: Image,identifier:Int) {
         try {
-//            if(identifier==0){
-//                imageBitmap  = convertImageProxyToBitmap(image)
-//            }else{
-//                imageBitmap = toBitmap(imageImage)
-//            }
-//            val imageInput = convertBitmapToByteBuffer(imageBitmap!!)
-//            val model = Model1.newInstance(context)
-//            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-//            inputFeature0.loadBuffer(imageInput!!)
-//            val outputs = model.process(inputFeature0)
-//            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-//            val fArray = outputFeature0.floatArray
-//
-//            var largest:Float= 0.0f
-//            var i =0
-//            var maxNo = 0
-//            for (num in fArray) {
-//                if (largest < num) {
-//                    largest = num
-//                    maxNo = i
-//                }
-//                i+=1
-//            }
-
             val stream = ByteArrayOutputStream()
             if(identifier==1){
                toBitmap(imageImage)!!.compress(Bitmap.CompressFormat.JPEG, 80, stream)
             }else{
                 convertImageProxyToBitmap(image)!!.compress(Bitmap.CompressFormat.JPEG, 80, stream)
             }
-
             val byteArray = stream.toByteArray()
-
-
             if(checkProcess) {
                 checkProcess = false
                 val request = object : VolleyFileUploadRequest(
                     Method.POST,
-                    "https://5dfa-34-142-138-64.ap.ngrok.io/upload",
+                    "__API_URL__",
                     Response.Listener {
                         checkProcess =true
                         objectDetectorListener?.onResults(
@@ -87,15 +59,8 @@ class ObjectDetectorHelper(
                         return params
                     }
                 }
-
                 Volley.newRequestQueue(context).add(request)
             }
-//
-//            val outputImage = getOutputImage(imageInput)
-//            model.close()
-//            objectDetectorListener?.onResults(
-//                largest,maxNo,outputImage!!)
-
         }catch (e:Exception){
             Log.d("EX",e.toString())
         }

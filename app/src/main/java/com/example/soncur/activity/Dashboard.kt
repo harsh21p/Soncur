@@ -3,12 +3,11 @@ package com.example.soncur.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.soncur.R
-import com.example.soncur.activity.fragment.CartFragment
-import com.example.soncur.activity.fragment.MagicFragment
 import com.example.soncur.activity.fragment.MainFragment
 import com.example.soncur.activity.fragment.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -21,14 +20,9 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard)
         auth = FirebaseAuth.getInstance()
-
         val fragmentHome = MainFragment()
         val fragmentProfile = ProfileFragment()
-        val fragmentCart = CartFragment()
-        val fragmentMagic = MagicFragment()
-
         showFragment(fragmentHome)
-
         home_button.setOnClickListener(View.OnClickListener {
             profile_button.setImageDrawable(
                 ContextCompat.getDrawable(this,
@@ -36,19 +30,10 @@ class Dashboard : AppCompatActivity() {
                 ));
             home_button.setImageDrawable(
                 ContextCompat.getDrawable(this,
-                    R.drawable.ic_home_1
-                ));
-            cart_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_cart_0
-                ));
-            magic_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.settings_0
+                    R.drawable.homesoncur
                 ));
             showFragment(fragmentHome)
         })
-
         profile_button.setOnClickListener(View.OnClickListener {
             profile_button.setImageDrawable(
                 ContextCompat.getDrawable(this,
@@ -56,59 +41,23 @@ class Dashboard : AppCompatActivity() {
                 ));
             home_button.setImageDrawable(
                 ContextCompat.getDrawable(this,
-                    R.drawable.ic_home_0
+                    R.drawable.homenotselected
                 ));
-            cart_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_cart_0
-                ));
-            magic_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.settings_0
-                ));
+
             showFragment(fragmentProfile)
         })
-
-        magic_button.setOnClickListener(View.OnClickListener {
-            profile_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_profile_0
-                ));
-            home_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_home_0
-                ));
-            cart_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_cart_0
-                ));
-            magic_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_settings_1
-                ));
-            showFragment(fragmentMagic)
+        scan_button_main!!.setOnClickListener(View.OnClickListener {
+//            profile_button.setImageDrawable(
+//                ContextCompat.getDrawable(this,
+//                    R.drawable.ic_profile_0
+//                ));
+//            home_button.setImageDrawable(
+//                ContextCompat.getDrawable(this,
+//                    R.drawable.homenotselected
+//                ));
+//            showFragment(camFragment)
+            Toast.makeText(this,"Not available for now.",Toast.LENGTH_SHORT);
         })
-
-        cart_button.setOnClickListener(View.OnClickListener {
-            profile_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_profile_0
-                ));
-            home_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_home_0
-                ));
-            cart_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.ic_cart_1
-                ));
-            magic_button.setImageDrawable(
-                ContextCompat.getDrawable(this,
-                    R.drawable.settings_0
-                ));
-            showFragment(fragmentCart)
-        })
-
     }
 
     private fun showFragment(fragment: Fragment){

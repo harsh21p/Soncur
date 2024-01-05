@@ -1,112 +1,139 @@
 package com.example.soncur.activity
-
-import android.content.ContentValues.TAG
-import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.MediaController
-import android.widget.Toast
+import android.view.ViewGroup
 import android.widget.VideoView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.soncur.R
 import com.example.soncur.activity.StaticRef.productId
+import com.example.soncur.activity.StaticRef.uFinalProduct
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.result_screen.*
+import java.util.concurrent.TimeUnit
 
+class ResultFragment : Fragment() {
 
-class Result : AppCompatActivity() {
+    private var videoUrl: String? = null
+    private lateinit var auth: FirebaseAuth
+    private var isPlaying = false
+    private var duration = 0
+    private var videoView: VideoView? = null
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateProgressRunnable = object : Runnable {
+        override fun run() {
+            updateProgress()
+            handler.postDelayed(this, 1000) // Update every 1 second
+        }
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.result_screen, container, false)
+    }
 
-    var videoUrl:String?= null
-    var db = FirebaseFirestore.getInstance()
-    lateinit var auth: FirebaseAuth
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(com.example.soncur.R.layout.result_screen)
+        videoView = view.findViewById(R.id.video)
 
-        close_button.setOnClickListener(View.OnClickListener {
-            val iLoginScreen = Intent(this@Result, Login::class.java)
-            startActivity(iLoginScreen)
-            finish()
-        })
+        line1.text = uFinalProduct.relationship
+        line2.text = uFinalProduct.name
+        line3.text = uFinalProduct.date
+        line4.text = uFinalProduct.bd_for
 
-        progressbar_video.visibility = View.VISIBLE
-        auth= FirebaseAuth.getInstance()
+        line1_2.text = uFinalProduct.type
+        line2_2.text = "Base Metal: "+uFinalProduct.material
+        line3_2.text = "Metal Plating: "+uFinalProduct.plating
 
-        val videoView = findViewById<VideoView>(com.example.soncur.R.id.video)
+        auth = FirebaseAuth.getInstance()
 
-        val docRef = db.collection("Links").document(auth!!.uid.toString())
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    try {
-                        videoUrl = document.data!!.getValue(productId).toString()
-                        videoSet(videoView)
-                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                    }catch (e:Exception){
-                        Toast.makeText(this,"Not found",Toast.LENGTH_LONG).show()
-                    }
-
-                } else {
-                    Log.d(TAG, "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
-
-        videoView.setOnCompletionListener {
-           Toast.makeText(this,"Thank you",Toast.LENGTH_LONG).show()
+        videoUrl = when (productId) {
+            "ID00022" -> "android.resource://${requireActivity().packageName}/raw/rohan_sumati"
+            else -> "android.resource://${requireActivity().packageName}/raw/animation_p"
         }
 
-        videoView.setOnPreparedListener {
+        videoSet(videoView!!)
+
+        seekBar.addOnChangeListener { slider, value, fromUser ->
+            if (fromUser) {
+                val newPosition = (value * duration / 100).toLong()
+                videoView!!.seekTo(newPosition.toInt())
+                updateCurrentTime(newPosition.toInt())
+            }
+        }
+
+        playPauseButton.setOnClickListener {
+            if (isPlaying) {
+                pauseVideo()
+            } else {
+                playVideo()
+            }
+        }
+
+        videoView!!.setOnCompletionListener {
+            stopVideo()
+        }
+
+        videoView!!.setOnPreparedListener {
             try {
-                videoView.start()
-                progressbar_video.visibility = View.GONE
-                visibility.visibility = View.GONE
-            }catch (e:Exception){
-
+                duration = videoView!!.duration
+                seekBar.valueTo = duration.toFloat()
+                handler.post(updateProgressRunnable)
+            } catch (e: Exception) {
+                // Handle exceptions
             }
-
-        }
-
-
-        videoView.setOnInfoListener { mp, what, extra ->
-
-            when (what) {
-                MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START -> {
-                    progressbar_video.setVisibility(View.GONE)
-                    return@setOnInfoListener true
-                }
-                MediaPlayer.MEDIA_INFO_BUFFERING_START -> {
-                    progressbar_video.setVisibility(View.VISIBLE)
-                    return@setOnInfoListener true
-                }
-                MediaPlayer.MEDIA_INFO_BUFFERING_END -> {
-                    progressbar_video.setVisibility(View.GONE)
-                    return@setOnInfoListener true
-                }
-            }
-            return@setOnInfoListener false
         }
     }
 
-
-    override fun onStop() {
-        super.onStop()
-
+    private fun playVideo() {
+        videoView!!.start()
+        isPlaying = true
+        playPauseButton.setImageResource(R.drawable.baseline_pause_24)
     }
 
-    private fun videoSet(videoView:VideoView) {
+    private fun pauseVideo() {
+        videoView!!.pause()
+        isPlaying = false
+        playPauseButton.setImageResource(R.drawable.baseline_play_arrow_24)
+    }
+
+    private fun stopVideo() {
+        videoView!!.stopPlayback()
+        isPlaying = false
+        playPauseButton.setImageResource(R.drawable.baseline_play_arrow_24)
+        seekBar.value = 0.0f
+        updateCurrentTime(0)
+        handler.removeCallbacks(updateProgressRunnable)
+    }
+
+    private fun updateProgress() {
+        val currentProgress = videoView!!.currentPosition.toFloat()
+        seekBar.value = currentProgress
+        updateCurrentTime(currentProgress.toInt())
+    }
+
+    private fun updateCurrentTime(currentPosition: Int) {
+        val formattedTime = formatTime(currentPosition.toLong())
+        currentTimeTextView.text = formattedTime
+    }
+
+    private fun formatTime(milliseconds: Long): String {
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds) % 60
+        return String.format("%02d:%02ds", minutes, seconds)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(updateProgressRunnable)
+    }
+
+    private fun videoSet(videoView: VideoView) {
         val uri: Uri = Uri.parse(videoUrl)
         videoView.setVideoURI(uri)
-        val mediaController = MediaController(this)
-        mediaController.setAnchorView(videoView)
-        mediaController.setMediaPlayer(videoView)
-        videoView.setMediaController(mediaController)
-
     }
 }

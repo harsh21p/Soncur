@@ -1,15 +1,13 @@
 package com.example.soncur.activity.fragment
 
 import android.content.ContentValues
-import android.content.Intent
-import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +17,7 @@ import com.example.soncur.activity.StaticRef.*
 import com.example.soncur.adapter.NonPersonalProductAdapter
 import com.example.soncur.adapter.ProductAdapter
 import com.example.soncur.datamodel.ModelProductList
+import com.example.soncur.datamodel.Product
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -39,6 +38,7 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.main_fragment,container,false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         nonPersonalProductAdapter =  NonPersonalProductAdapter(nonPersonalProductList,this@MainFragment,requireActivity())
@@ -51,125 +51,97 @@ class MainFragment : Fragment() {
         val nonPersonalProductRecyclerView = requireView()!!.findViewById<RecyclerView>(R.id.non_personal_product_recycler)
         nonPersonalProductRecyclerView!!.layoutManager = LinearLayoutManager(activity)
         nonPersonalProductRecyclerView!!.adapter = nonPersonalProductAdapter!!
-
-        personal_button!!.setOnClickListener(View.OnClickListener {
-            personal!!.setTextColor(Color.parseColor("#000000") )
-            non_personal!!.setTextColor(Color.parseColor("#BDBDBD"))
-            personal_selected!!.visibility= View.VISIBLE
-            non_personal_selected!!.visibility= View.INVISIBLE
+        val typeface = resources.getFont(R.font.poppins_semi_bold)
+        val typeface1 = resources.getFont(R.font.poppins_regular)
+        personal!!.setOnClickListener(View.OnClickListener {
+            personal!!.typeface = typeface
+            non_personal!!.typeface = typeface1
             personal_product_recycler!!.visibility=View.VISIBLE
             non_personal_product_recycler!!.visibility=View.GONE
         })
-        non_personal_button!!.setOnClickListener(View.OnClickListener {
-            non_personal!!.setTextColor(Color.parseColor("#000000"))
-            personal!!.setTextColor(Color.parseColor("#BDBDBD"))
-            non_personal_selected!!.visibility= View.VISIBLE
-            personal_selected!!.visibility= View.INVISIBLE
+        non_personal!!.setOnClickListener(View.OnClickListener {
+            personal!!.typeface = typeface1
+            non_personal!!.typeface = typeface
             personal_product_recycler!!.visibility=View.GONE
             non_personal_product_recycler!!.visibility=View.VISIBLE
         })
-
         auth= FirebaseAuth.getInstance()
         myRef = database!!.reference
-
-        var uProduct:String?=null
-
+        var uProduct = mutableListOf<Product>()
         progress_dashboard!!.visibility = View.VISIBLE
-
         val docRef = db.collection("Links").document(auth!!.uid.toString())
-        docRef.get()
+        docRef.collection("Products").get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    uProduct = document.data!!.getValue("Product").toString()
-                    if(uProduct == "") {
-                        try {
-                            progress_dashboard!!.visibility = View.GONE
-                            Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
-                        }catch (e:Exception){
-
-                        }
-
-                    }else{
-                        setProducts(uProduct!!)
-                    }
-                    Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
+                   document.forEach{ it ->
+                       if(it != null){
+                           progress_dashboard!!.visibility = View.GONE
+                            val date = it.data.get("Date").toString()
+                           val for_ = it.data.get("For").toString()
+                           val material = it.data.get("Material").toString()
+                           val name = it.data.get("Name").toString()
+                           val occasion = it.data.get("Occasion").toString()
+                           val plating = it.data.get("Plating").toString()
+                           val type = it.data.get("Type").toString()
+                           val id = it.data.get("ID").toString()
+                           val typeOfProduct = it.data.get("typeOfProduct").toString()
+                           val image: Int = it.data.get("Image").toString().toInt()
+                           val shape =  it.data.get("Shape").toString()
+                           val relationship = it.data.get("Relationship").toString()
+                           uProduct.add(Product(date,for_,material,name,occasion,plating,type,id,typeOfProduct,image,shape,relationship))
+                       }
+                   }
+                    setProducts(uProduct)
                 } else {
                     Log.d(ContentValues.TAG, "No such document")
                 }
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "get failed with ", exception)
-
                 try {
                     progress_dashboard!!.visibility = View.GONE
-                    Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
                 }catch (e:Exception){
-
                 }
-
             }
-
     }
-
-    private fun setProducts(uProduct: String) {
-
+    private fun setProducts(uProduct: MutableList<Product>) {
         productList.clear()
         nonPersonalProductList.clear()
-
-        uProductList = uProduct!!.split(':')
-        var i = 0
-        if(uProductList.isNotEmpty()){
-        while (i < uProductList.size){
-            var uProductListSecond = uProductList[i].split(',')
-            if(uProductListSecond.size!=1){
-                var temp = uProductListSecond[3]+"\n"+uProductListSecond[4]
-                var model = ModelProductList(uProductListSecond[1].toInt(),temp,uProductListSecond[0],uProductListSecond[2],uProductListSecond[5],uProductListSecond[6])
-                if(uProductListSecond[0].toInt() != 2) {
+        if(uProduct.isNotEmpty()){
+            uProduct.forEach { it ->
+                var model = ModelProductList(it.image,it.occasion,it.typeOfProduct,it.name,it.id,it.shape,it)
+                if (it.typeOfProduct !== "Non Personal") {
                     productList!!.add(model)
                     productAdapter!!.notifyDataSetChanged()
-                }else{
+                } else {
                     nonPersonalProductList!!.add(model)
                     nonPersonalProductAdapter!!.notifyDataSetChanged()
                 }
-            }else{
-                try {
-                    progress_dashboard!!.visibility = View.GONE
-                    Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
-                }catch (e:Exception){
-
-                }
-
             }
-            i+=1
-            try {
-                progress_dashboard!!.visibility = View.GONE
-            }catch (e:Exception){
-
-            }
-        }
-        }else {
-            try {
-                progress_dashboard!!.visibility = View.GONE
-                Toast.makeText(requireActivity(),"Not found",Toast.LENGTH_LONG).show()
-            }catch (e:Exception){
-
-            }
-
+            progress_dashboard!!.visibility = View.GONE
+        }else{
+            progress_dashboard!!.visibility = View.GONE
         }
     }
-
     fun onItemClick(position: Int) {
         productId = productList[position].uProductId
         productShape = productList[position].uProductShape
-        val iCameraScreen = Intent(activity, Camera::class.java)
-        startActivity(iCameraScreen)
+        uFinalProduct = productList[position].product
+        showFragment(Camera())
     }
+    private fun showFragment(fragment: Fragment){
+        try{
+            val frame = requireActivity().supportFragmentManager.beginTransaction()
+            frame.replace(R.id.fragment_main,fragment)
+            frame.commit()
+        }catch (e:Exception){
 
+        }
+    }
     fun onItemClickNonPersonal(position: Int) {
         productId = nonPersonalProductList[position].uProductId
         productShape = nonPersonalProductList[position].uProductShape
-        val iCameraScreen = Intent(activity, Camera::class.java)
-        startActivity(iCameraScreen)
+        showFragment(Camera())
     }
 
 }

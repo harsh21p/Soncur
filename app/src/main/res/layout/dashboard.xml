@@ -2,69 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="5">
-
-
             <FrameLayout
                 android:id="@+id/fragment_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1">
-
+               >
             </FrameLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:orientation="horizontal"
-            android:layout_gravity="bottom"
-            android:gravity="bottom"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/home_button"
+            <FrameLayout
+                android:id="@+id/main_bottom_tab"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_home_1"
-                android:paddingVertical="25dp" />
-            <ImageView
-                android:id="@+id/magic_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingVertical="25dp"
-                android:src="@drawable/settings_0" />
-            <ImageView
-                android:id="@+id/cart_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingVertical="25dp"
-                android:src="@drawable/ic_cart_0" />
-            <ImageView
-                android:id="@+id/profile_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingVertical="25dp"
-                android:src="@drawable/ic_profile_0" />
-        </LinearLayout>
-
-    </LinearLayout>
-
+                android:layout_height="130dp"
+                android:layout_marginTop="-130dp"
+                android:layout_gravity="center">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_gravity="bottom"
+                    app:cardElevation="3dp">
+                    <LinearLayout
+                        android:layout_gravity="bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/home_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/homesoncur"
+                            android:paddingVertical="25dp" />
+                        <ImageView
+                            android:id="@+id/profile_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingVertical="25dp"
+                            android:src="@drawable/ic_profile_0" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/scan_button_main"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="16dp"
+                        android:layout_marginBottom="17dp"
+                        android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/scan_button_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
+                        android:src="@drawable/scanner" />
+                    </androidx.cardview.widget.CardView>
+            </FrameLayout>
 </LinearLayout>

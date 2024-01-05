@@ -20,48 +20,41 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/welcome_back"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
-                        android:layout_marginLeft="23dp"
-                        android:layout_marginTop="36dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/login_to_continue"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="normal"
-                        android:layout_marginLeft="23dp"
-                        android:layout_marginTop="0dp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
                     <ImageView
-                        android:layout_width="169dp"
+                        android:layout_width="match_parent"
                         android:layout_height="34dp"
-                        android:layout_marginTop="52dp"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginBottom="52dp"
                         android:src="@drawable/secondry_logo_2"
                         android:layout_gravity="center"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/a_sound_story"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="normal"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="6dp" />
                 </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log In"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_marginTop="36dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log Into your existing account to be \n connected with your jewellery"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
 
             <FrameLayout
                 android:id="@+id/fragment_login"
@@ -69,10 +62,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.1">
 
-
             </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/go_to_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -102,21 +95,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:src="@drawable/primary_logo" />
-
-    </LinearLayout>
-
 </LinearLayout>
