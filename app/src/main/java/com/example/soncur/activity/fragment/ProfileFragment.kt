@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.soncur.R
 import com.example.soncur.activity.Login
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -51,10 +52,13 @@ class ProfileFragment: Fragment() {
                         progress_profile2.visibility = View.GONE
                     }
                 }
-            }
+            }.addOnFailureListener(OnFailureListener {
+                progress_profile2.visibility = View.GONE
+            })
         }catch (e:Exception){
             progress_profile2.visibility = View.GONE
         }
+
         logout_button.setOnClickListener(View.OnClickListener {
             popup_logout?.visibility = View.VISIBLE
         })
@@ -84,14 +88,16 @@ class ProfileFragment: Fragment() {
                     }catch (e:Exception){
 
                     }
+                        progress_profile2.visibility = View.GONE
                 }
         }.addOnFailureListener{
             try {
                 Toast.makeText(activity, "Something went wrong", Toast.LENGTH_SHORT).show()
             }catch (e:Exception){
-
             }
             Log.e("firebase", "Error getting data", it)
+            progress_profile2.visibility = View.GONE
+
         }
 
         edit_button.setOnClickListener(View.OnClickListener {
@@ -120,7 +126,7 @@ class ProfileFragment: Fragment() {
                             }
                         }
                 }.addOnFailureListener {
-                    //error
+                    progress_profile2.visibility = View.GONE
                 }
         } else {
             progress_profile2.visibility = View.GONE

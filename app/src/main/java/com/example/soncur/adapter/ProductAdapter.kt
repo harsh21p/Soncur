@@ -10,7 +10,6 @@ import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.soncur.R
-import com.example.soncur.activity.Dashboard
 import com.example.soncur.activity.fragment.MainFragment
 import com.example.soncur.datamodel.ModelProductList
 import kotlinx.android.synthetic.main.product_recyclerview_layout.view.*

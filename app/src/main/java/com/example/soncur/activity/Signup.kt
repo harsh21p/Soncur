@@ -30,9 +30,6 @@ class Signup : AppCompatActivity() {
         }
         var auth= FirebaseAuth.getInstance()
         myRef = database!!.reference
-
-
-
         val iLoginScreen = Intent(this@Signup, Login::class.java)
 
         signup_button.setOnClickListener(View.OnClickListener {
@@ -63,20 +60,15 @@ class Signup : AppCompatActivity() {
                                                         if(task.isSuccessful) {
                                                             progress_bar_signup.visibility = View.GONE
                                                             signup_button.visibility = View.VISIBLE
-
                                                             val data = hashMapOf(
-                                                                "Product" to "Add_products",
                                                                 "Email" to email.toString()
                                                             )
-
                                                             db.collection("Links").document(auth!!.uid.toString())
                                                                 .set(data)
                                                                 .addOnSuccessListener {
-
                                                                     auth.signOut()
                                                                     startActivity(iLoginScreen)
                                                                     finish()
-
                                                                     Log.d(TAG, "DocumentSnapshot successfully written!") }
                                                                 .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
 
