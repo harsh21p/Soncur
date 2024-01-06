@@ -78,12 +78,16 @@ class ResultFragment : Fragment() {
         videoView!!.setOnCompletionListener {
             stopVideo()
         }
-
         videoView!!.setOnPreparedListener {
             try {
                 duration = videoView!!.duration
                 seekBar.valueTo = duration.toFloat()
                 handler.post(updateProgressRunnable)
+                if (isPlaying) {
+                    pauseVideo()
+                } else {
+                    playVideo()
+                }
             } catch (e: Exception) {
                 // Handle exceptions
             }
