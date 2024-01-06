@@ -65,9 +65,9 @@ jobs:
           ls -a
           cd app/
           ls -a
-          cd app/build
+          cd build
           ls -a
-          cd app/build/outputs
+          cd outputs
           ls -a
 
       - name: Upload Artifact to Firebase App Distribution
