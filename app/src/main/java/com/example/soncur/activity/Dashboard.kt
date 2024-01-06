@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.dashboard.*
 class Dashboard : AppCompatActivity() {
     private var auth: FirebaseAuth?=null
     private var database= FirebaseDatabase.getInstance()
+    private var email:String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard)
@@ -27,9 +28,8 @@ class Dashboard : AppCompatActivity() {
         val fragmentProfile = ProfileFragment()
         database!!.reference.child("myAuthUser").child(auth!!.uid.toString()).get().addOnSuccessListener {
           try {
-              Log.e("EMAIL",it.child("Email").value.toString() )
-
-              if(it.child("Email").value.toString() == "admin@soncur.com"){
+              email = it.child("Email").value.toString()
+              if(email == "admin@soncur.com"){
                   showFragment(AddFragment())
               }else{
                   showFragment(fragmentHome)
@@ -46,7 +46,13 @@ class Dashboard : AppCompatActivity() {
                 ContextCompat.getDrawable(this,
                     R.drawable.homesoncur
                 ));
-            showFragment(fragmentHome)
+            if(email == "admin@soncur.com"){
+                showFragment(AddFragment())
+            }else{
+                if(email !== null) {
+                    showFragment(fragmentHome)
+                }
+            }
         })
         profile_button.setOnClickListener(View.OnClickListener {
             profile_button.setImageDrawable(
