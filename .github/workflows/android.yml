@@ -66,4 +66,4 @@ jobs:
           appId: ${{ secrets.FD_PROJECT_ID }}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
-          file: app/release/app-release.apk
+          file: app/build/outputs/apk/release/app-release.apk
