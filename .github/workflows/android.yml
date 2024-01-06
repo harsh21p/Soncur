@@ -60,19 +60,19 @@ jobs:
           ./gradlew clean
           ./gradlew assembleRelease
 
-      - name: List
-        run: |
-          ls -a
-          cd app
-          ls -a
-          cd build
-          ls -a
-          cd outputs
-          ls -a
-          cd apk
-          ls -a
-          cd release
-          ls -a
+#      - name: List
+#        run: |
+#          ls -a
+#          cd app
+#          ls -a
+#          cd build
+#          ls -a
+#          cd outputs
+#          ls -a
+#          cd apk
+#          ls -a
+#          cd release
+#          ls -a
 
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
@@ -80,4 +80,4 @@ jobs:
           appId: ${{ secrets.FD_PROJECT_ID }}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
-          file: app/build/outputs/apk/release/app-release.apk
+          file: app/build/outputs/apk/release/app-release-unsigned.apk
