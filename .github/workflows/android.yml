@@ -60,6 +60,16 @@ jobs:
           ./gradlew clean
           ./gradlew assembleRelease
 
+      - name: List
+        run: |
+          ls -a
+          cd app/
+          ls -a
+          cd app/build
+          ls -a
+          cd app/build/outputs
+          ls -a
+
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
