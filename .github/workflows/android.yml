@@ -1,29 +1,69 @@
-name: Android CI
+name: Android Build and Firebase Distribution
 
 on:
   push:
     branches:
-    - main
-    - cicd/*
-    - UIChanges
+      - UIChanges
 
 jobs:
-  build:
-
+  update-config:
+    name: Update Config
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
-    - name: Assemble Release
-      run: ./gradlew assembleRelease
+      - name: Update google-services.json
+        run: |
+          PROJECT_NUMBER="${{ secrets.PROJECT_NUMBER }}"
+          PROJECT_ID="${{ secrets.PROJECT_ID }}"
+          PROJECT_URL="${{ secrets.PROJECT_URL }}"
+          STORAGE_BUCKET="${{ secrets.STORAGE_BUCKET }}"
+          MOBILESDK_APP_ID="${{ secrets.MOBILESDK_APP_ID }}"
+          PACKAGE_NAME="${{ secrets.PACKAGE_NAME }}"
+          CLIENT_ID="${{ secrets.CLIENT_ID }}"
+          CURRENT_KEY="${{ secrets.CURRENT_KEY }}"
+          API_URL="${{ secrets.API_URL }}"
+          JSON_FILE="app/google-services.json"
+          API_FILE="app/src/main/java/com/example/soncur/activity/ObjectDetectionHelper.kt"
+          sed -i "s|__PROJECT_NUMBER__|${PROJECT_NUMBER}|g" $JSON_FILE
+          sed -i "s|__PROJECT_ID__|${PROJECT_ID}|g" $JSON_FILE
+          sed -i "s|__PROJECT_URL__|${PROJECT_URL}|g" $JSON_FILE
+          sed -i "s|__STORAGE_BUCKET__|${STORAGE_BUCKET}|g" $JSON_FILE
+          sed -i "s|__MOBILESDK_APP_ID__|${MOBILESDK_APP_ID}|g" $JSON_FILE
+          sed -i "s|__PACKAGE_NAME__|${PACKAGE_NAME}|g" $JSON_FILE
+          sed -i "s|__CLIENT_ID__|${CLIENT_ID}|g" $JSON_FILE
+          sed -i "s|__CURRENT_KEY__|${CURRENT_KEY}|g" $JSON_FILE
+          sed -i "s|__API_URL__|${API_URL}|g" $API_FILE
+        env:
+          PROJECT_NUMBER: ${{ secrets.PROJECT_NUMBER }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          PROJECT_URL: ${{ secrets.PROJECT_URL }}
+          STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
+          MOBILESDK_APP_ID: ${{ secrets.MOBILESDK_APP_ID }}
+          PACKAGE_NAME: ${{ secrets.PACKAGE_NAME }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CURRENT_KEY: ${{ secrets.CURRENT_KEY }}
+          API_URL: ${{ secrets.API_URL }}
+
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Build with Gradle
+        run: |
+          chmod +x gradlew
+          ./gradlew clean
+          ./gradlew assembleRelease
+
+      - name: Upload Artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FD_PROJECT_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app/build/outputs/apk/release/app-release.apk
