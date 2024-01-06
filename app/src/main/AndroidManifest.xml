@@ -55,17 +55,6 @@
             android:theme="@style/Theme.Soncur">
         </activity>
 
-        <activity android:name="com.example.soncur.activity.Camera"
-            android:label="ForHealth"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Soncur">
-        </activity>
-
-        <activity android:name="com.example.soncur.activity.Result"
-            android:label="ForHealth"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Soncur">
-        </activity>
     </application>
 
 </manifest>
