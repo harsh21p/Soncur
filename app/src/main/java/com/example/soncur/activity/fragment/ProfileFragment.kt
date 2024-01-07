@@ -40,6 +40,15 @@ class ProfileFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        contact_us.setOnClickListener(View.OnClickListener {
+            Toast.makeText(requireActivity(),"Coming soon.",Toast.LENGTH_SHORT).show()
+
+        })
+        privacy.setOnClickListener(View.OnClickListener {
+            Toast.makeText(requireActivity(),"Coming soon.",Toast.LENGTH_SHORT).show()
+
+        })
         progress_profile2.visibility = View.GONE
         try {
             progress_profile2.visibility = View.VISIBLE

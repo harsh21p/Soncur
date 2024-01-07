@@ -67,7 +67,8 @@ class Dashboard : AppCompatActivity() {
             showFragment(fragmentProfile)
         })
         scan_button_main!!.setOnClickListener(View.OnClickListener {
-            Toast.makeText(this,"Not available for now.",Toast.LENGTH_SHORT);
+            showFragment(Camera())
+//            Toast.makeText(this,"Not available for now.",Toast.LENGTH_SHORT).show()
         })
     }
 

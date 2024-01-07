@@ -21,13 +21,13 @@ class Login : AppCompatActivity() {
         showFragment(fragmentEmail)
 
         go_to_signup?.setOnClickListener(View.OnClickListener {
-            Toast.makeText(this,"Contact Soncur admin to register.",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Contact Soncur admin to register.",Toast.LENGTH_SHORT).show()
 
         })
         go_to_signup_page?.setOnClickListener(View.OnClickListener {
-            Toast.makeText(this,"Contact Soncur admin to register.",Toast.LENGTH_SHORT);
-            val iSignup = Intent(this, Signup::class.java)
-            startActivity(iSignup)
+            Toast.makeText(this,"Contact Soncur admin to register.",Toast.LENGTH_SHORT).show()
+//            val iSignup = Intent(this, Signup::class.java)
+//            startActivity(iSignup)
         })
     }
     private fun showFragment(fragment: Fragment){

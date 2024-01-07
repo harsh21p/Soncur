@@ -122,6 +122,7 @@ class MainFragment : Fragment() {
         }else{
             progress_dashboard!!.visibility = View.GONE
         }
+        onItemClick(0)
     }
     fun onItemClick(position: Int) {
         productId = productList[position].uProductId

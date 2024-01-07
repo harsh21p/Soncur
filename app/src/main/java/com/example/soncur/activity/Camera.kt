@@ -75,13 +75,13 @@ class Camera : Fragment(), ObjectDetectorHelper.DetectorListener {
             var flashManager = 0
             flash_button.setOnClickListener {
                 if(flashManager==0){
-//                    switchFlashLight(true)
+                    switchFlashLight(true)
                     flash_on_off.setImageDrawable(
                         ContextCompat.getDrawable(requireActivity(),
                             R.drawable.torch
                         ));
                     flashManager=1
-                    showFragment(ResultFragment())
+//                    showFragment(ResultFragment())
                 }else{
                     switchFlashLight(false)
                     flash_on_off.setImageDrawable(

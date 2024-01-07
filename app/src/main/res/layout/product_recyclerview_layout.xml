@@ -70,27 +70,27 @@
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="bottom"
-                android:gravity="center"
-                android:layout_weight="5">
-                <Button
-                    android:id="@+id/scan_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:background="@drawable/button_layout"
-                    android:text="Scan"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:textStyle="normal"
-                    android:fontFamily="@font/poppins_regular" />
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_weight="5">-->
+<!--                <Button-->
+<!--                    android:id="@+id/scan_button"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="36dp"-->
+<!--                    android:layout_marginHorizontal="20dp"-->
+<!--                    android:background="@drawable/button_layout"-->
+<!--                    android:text="Scan"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="normal"-->
+<!--                    android:fontFamily="@font/poppins_regular" />-->
+<!--            </LinearLayout>-->
         </LinearLayout>
     </LinearLayout>
 

@@ -47,7 +47,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Log Into your existing account to be \n connected with your jewellery"
+                    android:text="Log Into your existing account to be \nconnected with your jewellery"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/black"
                     android:textSize="15sp"

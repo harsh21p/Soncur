@@ -19,7 +19,7 @@ internal class ProductAdapter (private var List: List<ModelProductList>, private
     
     internal open inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         init {
-            itemView.scan_button.setOnClickListener(this)
+//            itemView.scan_button.setOnClickListener(this)
         }
         override fun onClick(p0: View?) {
             val position = adapterPosition
