@@ -45,7 +45,7 @@ internal class ProductAdapter (private var List: List<ModelProductList>, private
         var productImage: ImageView = itemView.findViewById(R.id.product_image)
         var titleWithName: TextView = itemView.findViewById(R.id.title_with_name)
         var sentence: TextView = itemView.findViewById(R.id.sentence)
-        var scanButton: TextView = itemView.findViewById(R.id.scan_button)
+//        var scanButton: TextView = itemView.findViewById(R.id.scan_button)
         fun bind(position: Int) {
             val recyclerViewModel = List[position]
             var productNo = recyclerViewModel.uProductNo
