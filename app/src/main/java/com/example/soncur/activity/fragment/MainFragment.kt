@@ -128,7 +128,7 @@ class MainFragment : Fragment() {
         productId = productList[position].uProductId
         productShape = productList[position].uProductShape
         uFinalProduct = productList[position].product
-        showFragment(Camera())
+//        showFragment(Camera())
     }
     private fun showFragment(fragment: Fragment){
         try{
@@ -142,7 +142,7 @@ class MainFragment : Fragment() {
     fun onItemClickNonPersonal(position: Int) {
         productId = nonPersonalProductList[position].uProductId
         productShape = nonPersonalProductList[position].uProductShape
-        showFragment(Camera())
+//        showFragment(Camera())
     }
 
 }
