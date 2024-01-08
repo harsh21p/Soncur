@@ -8,6 +8,8 @@ import java.util.List;
 public class StaticRef {
     public static String productId;
     public static String productShape;
+
+    public static String url;
     public static Product uFinalProduct;
 
 }

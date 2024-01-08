@@ -9,6 +9,7 @@ import androidx.camera.core.ImageProxy
 import com.android.volley.Response
 import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.Volley
+import com.example.soncur.activity.StaticRef.url
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -36,7 +37,7 @@ class ObjectDetectorHelper(
                 checkProcess = false
                 val request = object : VolleyFileUploadRequest(
                     Method.POST,
-                    "__API_URL__",
+                    url+"/upload",
                     Response.Listener {
                         checkProcess =true
                         objectDetectorListener?.onResults(

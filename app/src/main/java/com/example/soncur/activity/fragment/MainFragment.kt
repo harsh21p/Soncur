@@ -18,9 +18,13 @@ import com.example.soncur.adapter.NonPersonalProductAdapter
 import com.example.soncur.adapter.ProductAdapter
 import com.example.soncur.datamodel.ModelProductList
 import com.example.soncur.datamodel.Product
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.main_fragment.*
 
@@ -53,6 +57,9 @@ class MainFragment : Fragment() {
         nonPersonalProductRecyclerView!!.adapter = nonPersonalProductAdapter!!
         val typeface = resources.getFont(R.font.poppins_semi_bold)
         val typeface1 = resources.getFont(R.font.poppins_regular)
+
+
+
         personal!!.setOnClickListener(View.OnClickListener {
             personal!!.typeface = typeface
             non_personal!!.typeface = typeface1
@@ -67,6 +74,13 @@ class MainFragment : Fragment() {
         })
         auth= FirebaseAuth.getInstance()
         myRef = database!!.reference
+
+        myRef!!.child("url_data").get().addOnSuccessListener {
+            url = it.child("url").value.toString()
+            Log.e("URL", url)
+        }.addOnFailureListener {
+            Log.e("URL",it.toString())
+        }
         var uProduct = mutableListOf<Product>()
         progress_dashboard!!.visibility = View.VISIBLE
         val docRef = db.collection("Links").document(auth!!.uid.toString())
